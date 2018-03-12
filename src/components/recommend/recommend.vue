@@ -81,6 +81,7 @@
           if (res.code === ERR_OK) {
             console.error(res.data.slider)
             this.recommends = res.data.slider
+            // 数据赋值
           }
         })
       },

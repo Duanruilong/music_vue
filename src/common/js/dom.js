@@ -1,3 +1,11 @@
+/**
+ * dom操作函数
+ * @param  {[type]}                el
+ * @param  {[type]}                className
+ * @return {Boolean}                         [description]
+ * @author DRLong
+ * @date   2018-03-11T23:35:36+080
+ */
 export function hasClass(el, className) {
   let reg = new RegExp('(^|\\s)' + className + '(\\s|$)')
   return reg.test(el.className)

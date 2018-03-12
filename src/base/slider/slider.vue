@@ -46,7 +46,7 @@
           this._play()
         }
       }, 20)
-
+      // 监听窗口改动
       window.addEventListener('resize', () => {
         if (!this.slider) {
           return
@@ -101,8 +101,9 @@
             pageIndex -= 1
           }
           this.currentPageIndex = pageIndex
-
+          // 循环播放
           if (this.autoPlay) {
+            clearTimeout(this.timer)
             this._play()
           }
         })
