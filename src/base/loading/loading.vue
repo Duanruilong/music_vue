@@ -1,3 +1,7 @@
+/**
+ * loading 组件
+ * @type {String}
+ */
 <template>
   <div class="loading">
     <img width="24" height="24" src="./loading.gif">

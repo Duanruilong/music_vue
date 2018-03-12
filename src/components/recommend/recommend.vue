@@ -16,7 +16,7 @@
           <ul>
             <li @click="selectItem(item)" v-for="item in discList" class="item">
               <div class="icon">
-                <img width="60" height="60" :src="item.imgurl">
+                <img width="60" height="60" v-lazy="item.imgurl">
               </div>
               <div class="text">
                 <h2 class="name" v-html="item.creator.name"></h2>
@@ -64,7 +64,7 @@
         this.$refs.scroll.refresh()
       },
       loadImage() {
-        if (!this.checkloaded) {
+        if (!this.checkloaded) { // 只执行一次，解决滑动到底部高度不够的问题
           this.checkloaded = true
           this.$refs.scroll.refresh()
         }
@@ -97,7 +97,7 @@
         setDisc: 'SET_DISC'
       })
     },
-    components: {
+    components: { // 注册
       Slider,
       Loading,
       Scroll
