@@ -19,8 +19,8 @@ export function getRecommend() {
   return jsonp(url, data, options)
 }
 
-export function getDiscList() {
-  const url = '/api/getDiscList'
+export function getDiscList() { // 获取歌单接口
+  const url = '/api/getDiscList' // 对应dev-server.js
 
   const data = Object.assign({}, commonParams, {
     platform: 'yqq',
@@ -31,7 +31,7 @@ export function getDiscList() {
     needNewCode: 0,
     categoryId: 10000000,
     rnd: Math.random(),
-    format: 'json'
+    format: 'json' // 数据格式
   })
 
   return axios.get(url, {

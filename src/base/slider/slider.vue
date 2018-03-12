@@ -63,7 +63,7 @@
     deactivated() {
       clearTimeout(this.timer)
     },
-    beforeDestroy() {
+    beforeDestroy() { // 清除定时器任务
       clearTimeout(this.timer)
     },
     methods: {

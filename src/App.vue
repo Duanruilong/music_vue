@@ -1,3 +1,7 @@
+/**
+ * keep-alive  标签可以缓存DOM 优化页面
+ * @type {String}
+ */
 <template>
   <div id="app" @touchmove.prevent>
     <m-header></m-header>

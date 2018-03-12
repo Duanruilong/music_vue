@@ -16,7 +16,7 @@
           <ul>
             <li @click="selectItem(item)" v-for="item in discList" class="item">
               <div class="icon">
-                <img width="60" height="60" v-lazy="item.imgurl">
+                <img width="60" height="60" :src="item.imgurl">
               </div>
               <div class="text">
                 <h2 class="name" v-html="item.creator.name"></h2>
@@ -52,9 +52,9 @@
       }
     },
     created() {
-      this._getRecommend()
+      this._getRecommend() // 获取轮播图
 
-      this._getDiscList()
+      this._getDiscList() // 获取歌单
     },
     methods: {
       handlePlaylist(playlist) {
@@ -88,6 +88,7 @@
       _getDiscList() {
         getDiscList().then((res) => {
           if (res.code === ERR_OK) {
+            console.log(res.data.list)
             this.discList = res.data.list
           }
         })

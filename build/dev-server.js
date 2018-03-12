@@ -23,17 +23,17 @@ var proxyTable = config.dev.proxyTable
 
 var app = express()
 
-var apiRoutes = express.Router()
+var apiRoutes = express.Router() // 定义一个router
 
-apiRoutes.get('/getDiscList', function (req, res) {
+apiRoutes.get('/getDiscList', function (req, res) { // 定义一个路由，向qq服务器通过axios发送一个http请求，同时修改headers，把前端传来的参数res传递给QQ服务端，通过res.json传递给前端
   var url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
-  axios.get(url, {
-    headers: {
+  axios.get(url, { // 类似一个ajax库，
+    headers: { // 镜像
       referer: 'https://c.y.qq.com/',
       host: 'c.y.qq.com'
     },
     params: req.query
-  }).then((response) => {
+}).then((response) => { // response是axios.get，
     res.json(response.data)
   }).catch((e) => {
     console.log(e)
@@ -64,7 +64,7 @@ apiRoutes.get('/lyric', function (req, res) {
   })
 })
 
-app.use('/api', apiRoutes)
+app.use('/api', apiRoutes) // use一下
 
 var compiler = webpack(webpackConfig)
 

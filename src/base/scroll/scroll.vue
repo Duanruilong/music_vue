@@ -1,3 +1,7 @@
+/**
+ * 滚动  Scroll组件抽象
+ * @type {String}
+ */
 <template>
   <div ref="wrapper">
     <slot></slot>
@@ -48,7 +52,7 @@
         if (!this.$refs.wrapper) {
           return
         }
-        this.scroll = new BScroll(this.$refs.wrapper, {
+        this.scroll = new BScroll(this.$refs.wrapper, { // scroll初始化
           probeType: this.probeType,
           click: this.click
         })
@@ -74,13 +78,13 @@
           })
         }
       },
-      disable() {
+      disable() { // 方法代理
         this.scroll && this.scroll.disable()
       },
-      enable() {
+      enable() { // 方法代理
         this.scroll && this.scroll.enable()
       },
-      refresh() {
+      refresh() { // 刷新scroll
         this.scroll && this.scroll.refresh()
       },
       scrollTo() {
@@ -90,7 +94,7 @@
         this.scroll && this.scroll.scrollToElement.apply(this.scroll, arguments)
       }
     },
-    watch: {
+    watch: { // watch data变化，去重新计算scroll
       data() {
         setTimeout(() => {
           this.refresh()
