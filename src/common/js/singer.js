@@ -1,3 +1,7 @@
+/**
+ * 获取歌手的图片
+ * @type {[type]}
+ */
 export default class Singer {
   constructor({id, name}) {
     this.id = id

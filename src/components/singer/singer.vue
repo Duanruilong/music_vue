@@ -8,8 +8,75 @@
   </div>
 </template>
 
-<script>
+<script type="text/ecmascript-6">
+  import {getSingerList} from 'api/singer'
+  import {ERR_OK} from 'api/config'
+  import Singer from 'common/js/singer'
 
+  const HOT_SINGER_LEN = 10
+  const HOT_NAME = '热门'
+
+  export default {
+    data() {
+      return {
+        singers: []
+      }
+    },
+    created() {
+      this._getSingerList()
+    },
+    methods: {
+      _getSingerList() {
+        getSingerList().then((res) => {
+          if (res.code === ERR_OK) {
+            this.singers = res.data.list
+            console.log(res.data.list)
+          }
+        })
+      }
+    },
+    _normalizeSinger(list) {
+      let map = {
+        hot: {
+          title: HOT_NAME,
+          items: []
+        }
+      }
+      list.forEach((item, index) => { // 遍历数据，如果小于10条就加到热门歌手里
+        if (index < HOT_SINGER_LEN) {
+          map.hot.item.push(new Singer({
+            name: item.Fsinger_name,
+            id: item.Fsinger_mid
+          }))
+        }
+        const key = item.Findex // 根据字母Findex做聚类
+        if (!map[key]) { // 判断key进行赋值
+          map[key] = {
+            title: key,
+            item: []
+          }
+        }
+        map[key].item.push(new Singer({
+          name: item.Fsinger_name,
+          id: item.Fsinger_mid
+        }))
+      })
+      // 为了得到有序列表，我们需要处理 map 数据
+      let ret = []
+      let hot = []
+      for (let key in map) {
+        let val = map[key]
+        if (val.title.match(/[a-zA-Z]/)) { // match正则校验
+          ret.push(val)
+        } else if (val.title === HOT_NAME) {
+          hot.push(val)
+        }
+      }
+      ret.sort((a, b) => { // 数组的sort，Code码进行排序，升序
+        return a.title.charCodeAt(0) - b.title.charCodeAt(0)
+      })
+    }
+  }
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
