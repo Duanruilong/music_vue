@@ -1,3 +1,7 @@
+/**
+ * 滚动
+ * @type {String}
+ */
 <template>
   <scroll @scroll="scroll"
           :listen-scroll="listenScroll"
@@ -16,6 +20,7 @@
         </uL>
       </li>
     </ul>
+    <!-- 右侧字母导航 stop.prevent阻止事件冒泡和原生滚动-->
     <div class="list-shortcut" @touchstart.stop.prevent="onShortcutTouchStart" @touchmove.stop.prevent="onShortcutTouchMove"
          @touchend.stop>
       <ul>
@@ -48,9 +53,9 @@
         default: []
       }
     },
-    computed: {
-      shortcutList() {
-        return this.data.map((group) => {
+    computed: { // vue的一个计算属性
+      shortcutList() { // titile的集合数组
+        return this.data.map((group) => { // 遍历每一个的title
           return group.title.substr(0, 1)
         })
       },
@@ -68,7 +73,7 @@
         diff: -1
       }
     },
-    created() {
+    created() { // 不监听变化
       this.probeType = 3
       this.listenScroll = true
       this.touch = {}
@@ -78,19 +83,19 @@
       selectItem(item) {
         this.$emit('select', item)
       },
-      onShortcutTouchStart(e) {
-        let anchorIndex = getData(e.target, 'index')
-        let firstTouch = e.touches[0]
+      onShortcutTouchStart(e) { // Touch点击事件 点击时要获得索引“:data-index="index"”
+        let anchorIndex = getData(e.target, 'index') // 拿到index
+        let firstTouch = e.touches[0] // touches 触碰位置
         this.touch.y1 = firstTouch.pageY
-        this.touch.anchorIndex = anchorIndex
+        this.touch.anchorIndex = anchorIndex // 当前是第几个
 
         this._scrollTo(anchorIndex)
       },
-      onShortcutTouchMove(e) {
+      onShortcutTouchMove(e) { // Touch移动事件
         let firstTouch = e.touches[0]
         this.touch.y2 = firstTouch.pageY
         let delta = (this.touch.y2 - this.touch.y1) / ANCHOR_HEIGHT | 0
-        let anchorIndex = parseInt(this.touch.anchorIndex) + delta
+        let anchorIndex = parseInt(this.touch.anchorIndex) + delta  // 移动的数据
 
         this._scrollTo(anchorIndex)
       },
@@ -121,7 +126,7 @@
           index = this.listHeight.length - 2
         }
         this.scrollY = -this.listHeight[index]
-        this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0)
+        this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0) // 发生滚动
       }
     },
     watch: {

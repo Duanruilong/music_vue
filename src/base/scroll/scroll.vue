@@ -87,7 +87,7 @@
       refresh() { // 刷新scroll
         this.scroll && this.scroll.refresh()
       },
-      scrollTo() {
+      scrollTo() { // 滚动到位置
         this.scroll && this.scroll.scrollTo.apply(this.scroll, arguments)
       },
       scrollToElement() {

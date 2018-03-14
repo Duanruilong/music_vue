@@ -21,7 +21,7 @@ export function addClass(el, className) {
   el.className = newClass.join(' ')
 }
 
-export function getData(el, name, val) {
+export function getData(el, name, val) { // 获取‘data-’数据，val？
   const prefix = 'data-'
   if (val) {
     return el.setAttribute(prefix + name, val)
