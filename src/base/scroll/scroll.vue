@@ -21,7 +21,7 @@
         type: Boolean,
         default: true
       },
-      listenScroll: {
+      listenScroll: { // 监听scroll滚动事件
         type: Boolean,
         default: false
       },
@@ -60,7 +60,7 @@
         if (this.listenScroll) {
           let me = this
           this.scroll.on('scroll', (pos) => {
-            me.$emit('scroll', pos)
+            me.$emit('scroll', pos) // scroll事件
           })
         }
 

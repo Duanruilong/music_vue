@@ -24,8 +24,11 @@
     <div class="list-shortcut" @touchstart.stop.prevent="onShortcutTouchStart" @touchmove.stop.prevent="onShortcutTouchMove"
          @touchend.stop>
       <ul>
-        <li v-for="(item, index) in shortcutList" :data-index="index" class="item"
-            :class="{'current':currentIndex===index}">{{item}}
+        <li v-for="(item, index) in shortcutList"
+            :data-index="index"
+            class="item"
+            :class="{'current':currentIndex===index}">
+            {{item}}
         </li>
       </ul>
     </div>
@@ -66,7 +69,7 @@
         return this.data[this.currentIndex] ? this.data[this.currentIndex].title : ''
       }
     },
-    data() {
+    data() { // 位置数据
       return {
         scrollY: -1,
         currentIndex: 0,
@@ -74,7 +77,7 @@
       }
     },
     created() { // 不监听变化
-      this.probeType = 3
+      this.probeType = 3 // 实时滚动---3
       this.listenScroll = true
       this.touch = {}
       this.listHeight = []
@@ -105,14 +108,14 @@
       scroll(pos) {
         this.scrollY = pos.y
       },
-      _calculateHeight() {
+      _calculateHeight() { // 计算高度
         this.listHeight = []
         const list = this.$refs.listGroup
         let height = 0
         this.listHeight.push(height)
         for (let i = 0; i < list.length; i++) {
           let item = list[i]
-          height += item.clientHeight
+          height += item.clientHeight // clientHeight获取高度
           this.listHeight.push(height)
         }
       },
@@ -126,11 +129,11 @@
           index = this.listHeight.length - 2
         }
         this.scrollY = -this.listHeight[index]
-        this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0) // 发生滚动
+        this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0) // 发生滚动  0=没有滚动动画
       }
     },
     watch: {
-      data() {
+      data() { // data 发生变化，延时调用
         setTimeout(() => {
           this._calculateHeight()
         }, 20)
@@ -144,8 +147,8 @@
         }
         // 在中间部分滚动
         for (let i = 0; i < listHeight.length - 1; i++) {
-          let height1 = listHeight[i]
-          let height2 = listHeight[i + 1]
+          let height1 = listHeight[i] // 上限
+          let height2 = listHeight[i + 1] // 下限
           if (-newY >= height1 && -newY < height2) {
             this.currentIndex = i
             this.diff = height2 + newY
