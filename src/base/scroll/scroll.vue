@@ -12,7 +12,7 @@
   import BScroll from 'better-scroll'
 
   export default {
-    props: {
+    props: { // 声明一些变量，包括变量的类型
       probeType: {
         type: Number,
         default: 1
