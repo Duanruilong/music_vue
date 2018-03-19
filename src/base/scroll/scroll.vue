@@ -57,7 +57,7 @@
           click: this.click
         })
 
-        if (this.listenScroll) {
+        if (this.listenScroll) { // 监听了scroll事件
           let me = this
           this.scroll.on('scroll', (pos) => {
             me.$emit('scroll', pos) // scroll事件

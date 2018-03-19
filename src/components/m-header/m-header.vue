@@ -1,7 +1,7 @@
 <template>
   <div class="m-header">
     <div class="icon"></div>
-    <h1 class="text">Chicken Music</h1>
+    <!-- <h1 class="text">M RUI</h1> -->
     <router-link tag="div" class="mine" to="/user">
       <i class="icon-mine"></i>
     </router-link>
@@ -26,11 +26,11 @@
       display: inline-block
       vertical-align: top
       margin-top: 6px
-      width: 30px
-      height: 32px
+      width: 106px
+      height: 41px
       margin-right: 9px
       bg-image('logo')
-      background-size: 30px 32px
+      background-size: 100% 100%
     .text
       display: inline-block
       vertical-align: top

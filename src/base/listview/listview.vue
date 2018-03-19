@@ -71,7 +71,7 @@
     },
     data() { // 位置数据
       return {
-        scrollY: -1,
+        scrollY: -1, // 实时的滚动位置
         currentIndex: 0,
         diff: -1
       }
@@ -119,7 +119,7 @@
           this.listHeight.push(height)
         }
       },
-      _scrollTo(index) {
+      _scrollTo(index) { // 动画缓冲
         if (!index && index !== 0) {
           return
         }

@@ -15,7 +15,8 @@ fastclick.attach(document.body)
 // body下的点击就没有300ms延迟
 
 Vue.use(VueLazyload, { // 懒加载
-  loading: require('common/image/default.png')
+  // loading: require('common/image/default.png')
+  loading: require('common/image/music_lod.png')
 })
 
 /* eslint-disable no-new */
