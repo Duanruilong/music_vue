@@ -2,6 +2,9 @@
 
 > Vue.js 打造高级实战——音乐 App
 
+## 项目截图
+
+![image](./static/music.png)
 
 ### 安装与运行
 
