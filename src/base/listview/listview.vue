@@ -32,6 +32,7 @@
         </li>
       </ul>
     </div>
+    <!-- 滚动对应的字母flex定位 -->
     <div class="list-fixed" ref="fixed" v-show="fixedTitle">
       <div class="fixed-title">{{fixedTitle}} </div>
     </div>
@@ -63,10 +64,10 @@
         })
       },
       fixedTitle() {
-        if (this.scrollY > 0) {
+        if (this.scrollY > 0) { // 边界判断
           return ''
         }
-        return this.data[this.currentIndex] ? this.data[this.currentIndex].title : ''
+        return this.data[this.currentIndex] ? this.data[this.currentIndex].title : '' // 判断有没有title
       }
     },
     data() { // 位置数据
@@ -108,14 +109,14 @@
       scroll(pos) {
         this.scrollY = pos.y
       },
-      _calculateHeight() { // 计算高度
+      _calculateHeight() { // 计算高度，私有方法
         this.listHeight = []
         const list = this.$refs.listGroup
         let height = 0
         this.listHeight.push(height)
         for (let i = 0; i < list.length; i++) {
           let item = list[i]
-          height += item.clientHeight // clientHeight获取高度
+          height += item.clientHeight // dom可以通过clientHeight获取高度
           this.listHeight.push(height)
         }
       },
@@ -125,14 +126,14 @@
         }
         if (index < 0) {
           index = 0
-        } else if (index > this.listHeight.length - 2) {
+        } else if (index > this.listHeight.length - 2) { // 处理index的边界情况
           index = this.listHeight.length - 2
         }
-        this.scrollY = -this.listHeight[index]
+        this.scrollY = -this.listHeight[index] // 定位具体字母位置
         this.$refs.listview.scrollToElement(this.$refs.listGroup[index], 0) // 发生滚动  0=没有滚动动画
       }
     },
-    watch: {
+    watch: { // 观测变化
       data() { // data 发生变化，延时调用
         setTimeout(() => {
           this._calculateHeight()
