@@ -74,7 +74,7 @@
       return {
         scrollY: -1, // 实时的滚动位置
         currentIndex: 0,
-        diff: -1
+        diff: -1 // 滚动差
       }
     },
     created() { // 不监听变化
@@ -159,7 +159,7 @@
         // 当滚动到底部，且-newY大于最后一个元素的上限
         this.currentIndex = listHeight.length - 2
       },
-      diff(newVal) {
+      diff(newVal) { // 观测顶部flex 的定位高度
         let fixedTop = (newVal > 0 && newVal < TITLE_HEIGHT) ? newVal - TITLE_HEIGHT : 0
         if (this.fixedTop === fixedTop) {
           return

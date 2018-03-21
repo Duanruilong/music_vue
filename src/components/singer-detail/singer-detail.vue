@@ -1,3 +1,7 @@
+/**
+ * 歌手详情页
+ * @type {String}
+ */
 <template>
   <transition name="slide">
     <music-list :title="title" :bg-image="bgImage" :songs="songs"></music-list>
@@ -61,7 +65,7 @@
 </script>
 
 <style scoped lang="stylus" rel="stylesheet/stylus">
-  .slide-enter-active, .slide-leave-active
+  .slide-enter-active, .slide-leave-active // 过渡动画
     transition: all 0.3s
 
   .slide-enter, .slide-leave-to
