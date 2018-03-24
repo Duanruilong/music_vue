@@ -15,7 +15,7 @@
   import Singer from 'common/js/singer'
   import ListView from 'base/listview/listview'
   import {mapMutations} from 'vuex'
-
+  // mapMutations语法糖
   const HOT_SINGER_LEN = 10
   const HOT_NAME = '热门'
 
@@ -33,7 +33,7 @@
         this.$router.push({
           path: `/singer/${singer.id}`
         })
-        this.setSinger(singer)
+        this.setSinger(singer) // 修改了state
       },
       _getSingerList() {
         getSingerList().then((res) => {
@@ -63,7 +63,7 @@
               items: []
             }
           }
-          console.log(map[key])
+          // console.log(map[key])
           map[key].items.push(new Singer({
             name: item.Fsinger_name,
             id: item.Fsinger_mid
@@ -85,7 +85,7 @@
         })
         return hot.concat(ret)
       },
-      ...mapMutations({ // ?????
+      ...mapMutations({ // ?????====>>Mutations的修改，使用一个映射，
         setSinger: 'SET_SINGER'
       })
     },

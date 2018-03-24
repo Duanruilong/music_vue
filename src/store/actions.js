@@ -2,7 +2,14 @@ import * as types from './mutation-types'
 import {playMode} from 'common/js/config'
 import {shuffle} from 'common/js/util'
 import {saveSearch, clearSearch, deleteSearch, savePlay, saveFavorite, deleteFavorite} from 'common/js/cache'
-
+/**
+ * 一些异步操作，一些封装
+ * @param  {[type]}                list
+ * @param  {[type]}                song
+ * @return {[type]}                     [description]
+ * @author DRLong
+ * @date   2018-03-24T23:25:36+080
+ */
 function findIndex(list, song) {
   return list.findIndex((item) => {
     return item.id === song.id

@@ -1,3 +1,10 @@
+/**
+ * 一些映射
+ * @param  {[type]}                state
+ * @return {[type]}                      [description]
+ * @author DRLong
+ * @date   2018-03-24T23:26:58+080
+ */
 export const singer = state => state.singer
 
 export const playing = state => state.playing

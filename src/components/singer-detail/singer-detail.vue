@@ -15,7 +15,7 @@
   import {createSong} from 'common/js/song'
   import {mapGetters} from 'vuex'
 
-  export default {
+  export default { // 取数据，mapGetters方法---取数据语法糖
     computed: {
       title() {
         return this.singer.name
@@ -23,7 +23,7 @@
       bgImage() {
         return this.singer.avatar
       },
-      ...mapGetters([
+      ...mapGetters([ // singer--->对应的是store->getters下的singer属性
         'singer'
       ])
     },
@@ -32,7 +32,8 @@
         songs: []
       }
     },
-    created() {
+    created() { // 组件created
+      console.log(this.singer)
       this._getDetail()
     },
     methods: {

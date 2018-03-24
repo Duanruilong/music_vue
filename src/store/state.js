@@ -1,6 +1,9 @@
 import {playMode} from 'common/js/config'
 import {loadSearch, loadPlay, loadFavorite} from 'common/js/cache'
-
+/**
+ * 状态
+ * @type {Object}
+ */
 const state = {
   singer: {},
   playing: false,
