@@ -23,7 +23,7 @@
       bgImage() {
         return this.singer.avatar
       },
-      ...mapGetters([ // singer--->对应的是store->getters下的singer属性
+      ...mapGetters([ // singer--->对应的是store->getters下的singer属性,一个数组可以map多个数据
         'singer'
       ])
     },
