@@ -34,11 +34,11 @@
     },
     created() { // 组件created
       console.log(this.singer)
-      this._getDetail()
+      this._getDetail() // 调用getSingerDetail方法
     },
     methods: {
       _getDetail() {
-        if (!this.singer.id) {
+        if (!this.singer.id) { // 没有ID的时候，我们就回退到歌手列表
           this.$router.push('/singer')
           return
         }
