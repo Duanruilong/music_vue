@@ -45,14 +45,15 @@
         getSingerDetail(this.singer.id).then((res) => {
           if (res.code === ERR_OK) {
             this.songs = this._normalizeSongs(res.data.list)
+            console.log(this.songs)
           }
         })
       },
-      _normalizeSongs(list) {
+      _normalizeSongs(list) { // 遍历歌手具体数据
         let ret = []
         list.forEach((item) => {
-          let {musicData} = item
-          if (musicData.songid && musicData.albummid) {
+          let {musicData} = item // musicData适用于排行榜和歌单
+          if (musicData.songid && musicData.albummid) { // songid\albummid很重要
             ret.push(createSong(musicData))
           }
         })
