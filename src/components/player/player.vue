@@ -285,7 +285,7 @@
       error() { // 歌曲报错或者加载失败，去做好用户体验
         this.songReady = true
       },
-      updateTime(e) { // 播放器，当前时间
+      updateTime(e) { // 播放器，当前播放的时间
         console.log(e.target)
         this.currentTime = e.target.currentTime
       },
