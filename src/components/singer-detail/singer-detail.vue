@@ -49,10 +49,10 @@
           }
         })
       },
-      _normalizeSongs(list) { // 遍历歌手具体数据
+      _normalizeSongs(list) { // 遍历歌手具体数据，对类做一些处理
         let ret = []
         list.forEach((item) => {
-          let {musicData} = item // musicData适用于排行榜和歌单
+          let {musicData} = item // musicData适用于排行榜和歌单，面向对象结构赋值
           if (musicData.songid && musicData.albummid) { // songid\albummid很重要
             ret.push(createSong(musicData))
           }

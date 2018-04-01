@@ -60,20 +60,20 @@
     },
     data() {
       return {
-        scrollY: 0
+        scrollY: 0 // 纵向滚动值
       }
     },
     computed: {
-      bgStyle() {
-        return `background-image:url(${this.bgImage})`
+      bgStyle() { // 计算之后的样式
+        return `background-image:url(${this.bgImage})` // 头像的连接
       }
     },
-    created() {
+    created() { // created属性
       this.probeType = 3
       this.listenScroll = true
     },
-    mounted() {
-      this.imageHeight = this.$refs.bgImage.clientHeight
+    mounted() { // mounted生命周期
+      this.imageHeight = this.$refs.bgImage.clientHeight // 记录下高度
       this.minTransalteY = -this.imageHeight + RESERVED_HEIGHT
       this.$refs.list.$el.style.top = `${this.imageHeight}px`
     },
@@ -107,7 +107,7 @@
     },
     watch: {
       scrollY(newVal) {
-        let translateY = Math.max(this.minTransalteY, newVal)
+        let translateY = Math.max(this.minTransalteY, newVal) // 最大的滚动值
         let scale = 1
         let zIndex = 0
         let blur = 0
@@ -120,6 +120,7 @@
         }
 
         this.$refs.layer.style[transform] = `translate3d(0,${translateY}px,0)`
+        this.$refs.layer.style[transform] = `webkitTranslate3d(0,${translateY}px,0)`
         this.$refs.filter.style[backdrop] = `blur(${blur}px)`
         if (newVal < this.minTransalteY) {
           zIndex = 10
@@ -135,7 +136,7 @@
         this.$refs.bgImage.style.zIndex = zIndex
       }
     },
-    components: {
+    components: { // 注册组件
       Scroll,
       Loading,
       SongList
