@@ -111,18 +111,17 @@
         let scale = 1
         let zIndex = 0
         let blur = 0
-        const percent = Math.abs(newVal / this.imageHeight)
-        if (newVal > 0) {
+        const percent = Math.abs(newVal / this.imageHeight) // Math.abs绝对值
+        if (newVal > 0) { // 下拉放大效果
           scale = 1 + percent
           zIndex = 10
         } else {
-          blur = Math.min(20, percent * 20)
+          blur = Math.min(20, percent * 20) // 模糊效果
         }
-
+        // 上拉跟随动画
         this.$refs.layer.style[transform] = `translate3d(0,${translateY}px,0)`
-        this.$refs.layer.style[transform] = `webkitTranslate3d(0,${translateY}px,0)`
         this.$refs.filter.style[backdrop] = `blur(${blur}px)`
-        if (newVal < this.minTransalteY) {
+        if (newVal < this.minTransalteY) { // 监听滚动到顶部时
           zIndex = 10
           this.$refs.bgImage.style.paddingTop = 0
           this.$refs.bgImage.style.height = `${RESERVED_HEIGHT}px`
