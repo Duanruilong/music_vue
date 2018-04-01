@@ -13,7 +13,7 @@
   import {getSingerDetail} from 'api/singer'
   import {ERR_OK} from 'api/config'
   import {createSong} from 'common/js/song'
-  import {mapGetters} from 'vuex'
+  import {mapGetters} from 'vuex' // 为取数据提供语法糖
 
   export default { // 取数据，mapGetters方法---取数据语法糖
     computed: {

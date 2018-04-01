@@ -1,5 +1,5 @@
 /**
- * 一些映射
+ * 一些映射 对于state
  * @param  {[type]}                state
  * @return {[type]}                      [description]
  * @author DRLong

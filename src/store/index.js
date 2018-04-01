@@ -11,9 +11,9 @@ import createLogger from 'vuex/dist/logger'
  * @type {[type]}
  */
 
- // createLogger会有一条修改日志
+ // createLogger state的修改就会有一条修改日志
 Vue.use(Vuex)
- // 调试工具，开启vuex的严格模式，只是在本地调试使用，会很消耗内存；webpage编译的时候是production
+ // 调试工具，开启vuex的严格模式，不建议在线上使用，只是在本地调试使用，会很消耗内存；webpage编译的时候是production
 const debug = process.env.NODE_ENV !== 'production'
  // export 一个Vuex.Store实例
 export default new Vuex.Store({

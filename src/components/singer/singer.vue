@@ -15,7 +15,7 @@
   import Singer from 'common/js/singer'
   import ListView from 'base/listview/listview'
   import {mapMutations} from 'vuex'
-  // mapMutations语法糖
+    // mapMutations语法糖
   const HOT_SINGER_LEN = 10
   const HOT_NAME = '热门'
 
@@ -85,7 +85,7 @@
         })
         return hot.concat(ret)
       },
-      ...mapMutations({ // ?????====>>Mutations的修改，使用一个映射，
+      ...mapMutations({ // ?????====>>Mutations的修改，使用一个映射，在组件中提交 Mutation
         setSinger: 'SET_SINGER'
       })
     },

@@ -7,7 +7,7 @@ import VueLazyload from 'vue-lazyload'
 import store from './store'
 
 import 'common/stylus/index.styl'
-
+/* 入口页面 */
 /* eslint-disable no-unused-vars */
 import vConsole from 'vconsole'
 
