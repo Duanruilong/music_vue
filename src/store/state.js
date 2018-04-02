@@ -6,12 +6,12 @@ import {loadSearch, loadPlay, loadFavorite} from 'common/js/cache'
  */
 const state = {
   singer: {},
-  playing: false,
-  fullScreen: false,
-  playlist: [],
-  sequenceList: [],
-  mode: playMode.sequence,
-  currentIndex: -1,
+  playing: false, // 播放状态
+  fullScreen: false, // 是否展开
+  playlist: [], // 播放列表
+  sequenceList: [], // 顺序列表
+  mode: playMode.sequence, // 播放模式
+  currentIndex: -1, // 当前播放
   disc: {},
   topList: {},
   searchHistory: loadSearch(),

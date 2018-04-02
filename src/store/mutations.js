@@ -1,6 +1,7 @@
 import * as types from './mutation-types'
 /**
- * mutation
+ * mutation 本质是一个函数
+ * singer -- 修改对象
  * ----日志------
  * @type {Object}
  */

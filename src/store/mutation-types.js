@@ -1,6 +1,6 @@
 /**
  * 存储于mutation相关的常量
- * @type {String}
+ * @type {drl}
  */
 export const SET_SINGER = 'SET_SINGER'
 
