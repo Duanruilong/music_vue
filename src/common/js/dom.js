@@ -29,9 +29,9 @@ export function getData(el, name, val) { // 获取‘data-’数据，val？
   return el.getAttribute(prefix + name)
 }
 
-let elementStyle = document.createElement('div').style
+let elementStyle = document.createElement('div').style // 能力检测-创建标签的style
 
-let vendor = (() => {
+let vendor = (() => { // 浏览器供应商
   let transformNames = {
     webkit: 'webkitTransform',
     Moz: 'MozTransform',
@@ -58,5 +58,5 @@ export function prefixStyle(style) {
     return style
   }
 
-  return vendor + style.charAt(0).toUpperCase() + style.substr(1)
+  return vendor + style.charAt(0).toUpperCase() + style.substr(1) // css样式拼接
 }
