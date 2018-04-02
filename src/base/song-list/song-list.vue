@@ -1,3 +1,7 @@
+/**
+ * song组件
+ * @type {drl}
+ */
 <template>
   <div class="song-list">
     <ul>

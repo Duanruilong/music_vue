@@ -1,3 +1,7 @@
+/**
+ * 歌手列表
+ * @type {drl}
+ */
 <template>
   <div class="music-list">
     <div class="back" @click="back">
@@ -87,7 +91,7 @@
       scroll(pos) {
         this.scrollY = pos.y
       },
-      back() {
+      back() { // 返回事件
         this.$router.back()
       },
       selectItem(item, index) {

@@ -1,6 +1,6 @@
 /**
  * 歌手详情页
- * @type {String}
+ * @type {drl}
  */
 <template>
   <transition name="slide">
