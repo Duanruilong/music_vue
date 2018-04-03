@@ -1,5 +1,6 @@
 /**
  * 存储于mutation相关的常量
+ * 有哪些修改动作
  * @type {drl}
  */
 export const SET_SINGER = 'SET_SINGER'

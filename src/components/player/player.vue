@@ -1,3 +1,8 @@
+/** 
+ * @Author: DRL 
+ * @Date: 2018-04-03 23:35:04 
+ * @Desc: 播放器文件 
+ */
 <template>
   <div class="player" v-show="playlist.length>0">
     <transition name="normal"
@@ -144,7 +149,7 @@
       percent() {
         return this.currentTime / this.currentSong.duration
       },
-      ...mapGetters([
+      ...mapGetters([ // mutation 改变之后就会映射到这
         'currentIndex',
         'fullScreen',
         'playing'

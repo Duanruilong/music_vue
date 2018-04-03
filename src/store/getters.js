@@ -19,7 +19,7 @@ export const mode = state => state.mode
 
 export const currentIndex = state => state.currentIndex
 
-export const currentSong = (state) => { // 计算返回数据
+export const currentSong = (state) => { // 计算返回数据  currentSong=playlist与currentIndex计算而来
   return state.playlist[state.currentIndex] || {}
 }
 

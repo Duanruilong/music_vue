@@ -15,7 +15,7 @@
 
 <script type="text/ecmascript-6">
   import MHeader from 'components/m-header/m-header'
-  import Player from 'components/player/player'
+  import Player from 'components/player/player' // 任何路由下都可以运行
   import Tab from 'components/tab/tab'
 
   export default {

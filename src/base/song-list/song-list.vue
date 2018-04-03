@@ -31,7 +31,7 @@
       }
     },
     methods: {
-      selectItem(item, index) {
+      selectItem(item, index) { // 触发播放器，基础组件，只派发动作，不要太依赖 外部怎么使用父组件的行为，子组件的行为应与本身相关，selectItem把自身可以为外部所用的数据通过事件的方式传递出去
         this.$emit('select', item, index)
       },
       getDesc(song) {

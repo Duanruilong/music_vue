@@ -36,7 +36,7 @@
   import SongList from 'base/song-list/song-list'
   import {prefixStyle} from 'common/js/dom'
   import {playlistMixin} from 'common/js/mixin'
-  import {mapActions} from 'vuex'
+  import {mapActions} from 'vuex'  // 语法糖vuex
 
   const RESERVED_HEIGHT = 40
   // css 样式自适应兼容
@@ -95,7 +95,7 @@
         this.$router.back()
       },
       selectItem(item, index) {
-        this.selectPlay({
+        this.selectPlay({ // 播放整个列表
           list: this.songs,
           index
         })
@@ -105,7 +105,7 @@
           list: this.songs
         })
       },
-      ...mapActions([
+      ...mapActions([ // mapActions把action包装成 类似函数调用的形式，与 mutation语法一样
         'selectPlay',
         'randomPlay'
       ])

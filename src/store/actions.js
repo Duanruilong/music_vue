@@ -4,18 +4,19 @@ import {shuffle} from 'common/js/util'
 import {saveSearch, clearSearch, deleteSearch, savePlay, saveFavorite, deleteFavorite} from 'common/js/cache'
 /**
  * 一些异步操作，一些封装
- * @param  {[type]}                list
- * @param  {[type]}                song
- * @return {[type]}                     [description]
+ * @param  {[type]} list
+ * @param  {[type]} song
+ * @return {[type]} [  ● 操作action就会修改state，通过提交mutation去修改数据，数据就会映射到player.vue里面的数据，然后player的数据就会映射到对应的DOM上]
  * @author DRLong
  * @date   2018-03-24T23:25:36+080
  */
+
 function findIndex(list, song) {
   return list.findIndex((item) => {
     return item.id === song.id
   })
 }
-
+ // 选择播放，提交"SET_SEQUENCE_LIST "
 export const selectPlay = function ({commit, state}, {list, index}) {
   commit(types.SET_SEQUENCE_LIST, list)
   if (state.mode === playMode.random) {

@@ -1,7 +1,7 @@
 import * as types from './mutation-types'
 /**
- * mutation 本质是一个函数
- * singer -- 修改对象
+ * mutation 本质是一个函数，接收2个参数，第一个是state，第二个是修改对象
+ * singer --> 修改对象（数据类型）
  * ----日志------
  * @type {Object}
  */
