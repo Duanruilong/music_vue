@@ -159,10 +159,10 @@
       this.touch = {}
     },
     methods: {
-      back() {
+      back() { // 控制迷你播放器，也是通过mutation去改变
         this.setFullScreen(false)
       },
-      open() {
+      open() { // 控制迷你播放器，也是通过mutation去改变
         this.setFullScreen(true)
       },
       enter(el, done) {
