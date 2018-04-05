@@ -1,7 +1,8 @@
 /** 
  * @Author: DRL 
  * @Date: 2018-04-03 23:35:04 
- * @Desc: 播放器文件 
+ * @Desc: 歌曲的播放器组件 
+ * VUE 动画transition
  */
 <template>
   <div class="player" v-show="playlist.length>0">
@@ -107,7 +108,7 @@
 
 <script type="text/ecmascript-6">
   import {mapGetters, mapMutations, mapActions} from 'vuex'
-  import animations from 'create-keyframe-animation'
+  import animations from 'create-keyframe-animation' // js写css3动画-（create-keyframe-animation）
   import {prefixStyle} from 'common/js/dom'
   import ProgressBar from 'base/progress-bar/progress-bar'
   import ProgressCircle from 'base/progress-circle/progress-circle'
@@ -165,10 +166,10 @@
       open() { // 控制迷你播放器，也是通过mutation去改变
         this.setFullScreen(true)
       },
-      enter(el, done) {
+      enter(el, done) { // VUE 的一些动画钩子。el-->dom;done-->回调函数,回调到afterEnter
         const {x, y, scale} = this._getPosAndScale()
 
-        let animation = {
+        let animation = { // 定义动画
           0: {
             transform: `translate3d(${x}px,${y}px,0) scale(${scale})`
           },
@@ -184,24 +185,24 @@
           name: 'move',
           animation,
           presets: {
-            duration: 400,
-            easing: 'linear'
+            duration: 400, // 间隔
+            easing: 'linear' // 动画预设
           }
         })
 
         animations.runAnimation(this.$refs.cdWrapper, 'move', done)
       },
-      afterEnter() {
+      afterEnter() { // VUE 的一些动画钩子
         animations.unregisterAnimation('move')
-        this.$refs.cdWrapper.style.animation = ''
+        this.$refs.cdWrapper.style.animation = '' // style制为空
       },
-      leave(el, done) {
+      leave(el, done) { // VUE 的一些动画钩子el-->dom;done-->回调函数,回调到afterLeave
         this.$refs.cdWrapper.style.transition = 'all 0.4s'
         const {x, y, scale} = this._getPosAndScale()
         this.$refs.cdWrapper.style[transform] = `translate3d(${x}px,${y}px,0) scale(${scale})`
         this.$refs.cdWrapper.addEventListener('transitionend', done)
       },
-      afterLeave() {
+      afterLeave() { // VUE 的一些动画钩子
         this.$refs.cdWrapper.style.transition = ''
         this.$refs.cdWrapper.style[transform] = ''
       },
@@ -390,13 +391,13 @@
         }
         return num
       },
-      _getPosAndScale() {
+      _getPosAndScale() { // 获取初始位置，缩放尺寸
         const targetWidth = 40
         const paddingLeft = 40
         const paddingBottom = 30
         const paddingTop = 80
         const width = window.innerWidth * 0.8
-        const scale = targetWidth / width
+        const scale = targetWidth / width // 缩放比例
         const x = -(window.innerWidth / 2 - paddingLeft)
         const y = window.innerHeight - paddingTop - width / 2 - paddingBottom
         return {
