@@ -2,7 +2,7 @@
  * @Author: DRL 
  * @Date: 2018-04-03 23:35:04 
  * @Desc: 歌曲的播放器组件 
- * VUE 动画transition
+ * VUE 动画transition，加入事件函数
  */
 <template>
   <div class="player" v-show="playlist.length>0">
@@ -202,7 +202,7 @@
         this.$refs.cdWrapper.style[transform] = `translate3d(${x}px,${y}px,0) scale(${scale})`
         this.$refs.cdWrapper.addEventListener('transitionend', done)
       },
-      afterLeave() { // VUE 的一些动画钩子
+      afterLeave() { // VUE 的一些动画钩子，这里是leave之后的回调走这里
         this.$refs.cdWrapper.style.transition = ''
         this.$refs.cdWrapper.style[transform] = ''
       },
