@@ -231,8 +231,8 @@
           this.currentLyric.seek(0)
         }
       },
-      next() {
-        if (!this.songReady) {
+      next() { // 下一首
+        if (!this.songReady) { // 对快速点击播放报错处理
           return
         }
         if (this.playlist.length === 1) {
@@ -243,14 +243,14 @@
           if (index === this.playlist.length) {
             index = 0
           }
-          this.setCurrentIndex(index)
-          if (!this.playing) {
+          this.setCurrentIndex(index) // 修改值
+          if (!this.playing) { // 修改播放状态样式
             this.togglePlaying()
           }
         }
         this.songReady = false
       },
-      prev() {
+      prev() { // 上一首
         if (!this.songReady) {
           return
         }
@@ -262,14 +262,14 @@
           if (index === -1) {
             index = this.playlist.length - 1
           }
-          this.setCurrentIndex(index)
+          this.setCurrentIndex(index) // 修改值
           if (!this.playing) {
             this.togglePlaying()
           }
         }
         this.songReady = false
       },
-      ready() {
+      ready() { // songReady为true才播放
         this.songReady = true
         this.savePlayHistory(this.currentSong)
       },
@@ -407,8 +407,10 @@
           scale
         }
       },
-      ...mapMutations({
-        setFullScreen: 'SET_FULL_SCREEN'
+      ...mapMutations({ // 调用对应的‘setFullScreen’state去修改对应的值
+        setFullScreen: 'SET_FULL_SCREEN',
+        setPlayingState: 'SET_PLAYING_STATE',
+        setCurrentIndex: 'SET_CURRENT_INDEX'
       }),
       ...mapActions([
         'savePlayHistory'
