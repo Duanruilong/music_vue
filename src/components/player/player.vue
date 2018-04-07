@@ -148,7 +148,7 @@
       disableCls() { // 只有准备条件满足是才去做对应操作
         return this.songReady ? '' : 'disable'
       },
-      percent() { // 播放比例，当前播放时间除于总时长 
+      percent() { // 对于播放比例当前播放时间除于总时长
         return this.currentTime / this.currentSong.duration
       },
       ...mapGetters([ // mutation 改变之后就会映射到这
@@ -285,7 +285,7 @@
         const second = this._pad(interval % 60)
         return `${minute}:${second}`
       },
-      onProgressBarChange(percent) {
+      onProgressBarChange(percent) { // 滚动条的触发事件回调函数
         const currentTime = this.currentSong.duration * percent
         this.$refs.audio.currentTime = currentTime
         if (!this.playing) {

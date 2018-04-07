@@ -2,6 +2,8 @@
  * @Author: DRl 
  * @Date: 2018-04-07 22:23:40 
  * @Desc: 播放滚动条 
+ * 很多是touch事件的监听
+ * .prevent阻止浏览器的默认事件
  */
 <template>
   <div class="progress-bar" ref="progressBar" @click="progressClick">
@@ -32,12 +34,12 @@
       }
     },
     created() {
-      this.touch = {}
+      this.touch = {} // 用于不同事件，公用一些变量数据
     },
     methods: {
-      progressTouchStart(e) {
-        this.touch.initiated = true
-        this.touch.startX = e.touches[0].pageX
+      progressTouchStart(e) { // e----》event对象
+        this.touch.initiated = true // 初始化
+        this.touch.startX = e.touches[0].pageX // startX横向坐标
         this.touch.left = this.$refs.progress.clientWidth
       },
       progressTouchMove(e) {
@@ -45,11 +47,11 @@
           return
         }
         const deltaX = e.touches[0].pageX - this.touch.startX
-        const offsetWidth = Math.min(this.$refs.progressBar.clientWidth - progressBtnWidth, Math.max(0, this.touch.left + deltaX))
+        const offsetWidth = Math.min(this.$refs.progressBar.clientWidth - progressBtnWidth, Math.max(0, this.touch.left + deltaX)) // 改变offsetWidth的宽度
         this._offset(offsetWidth)
       },
       progressTouchEnd() {
-        this.touch.initiated = false
+        this.touch.initiated = false // 重置变量
         this._triggerPercent()
       },
       progressClick(e) {
@@ -63,7 +65,7 @@
       _triggerPercent() {
         const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth
         const percent = this.$refs.progress.clientWidth / barWidth
-        this.$emit('percentChange', percent)
+        this.$emit('percentChange', percent) // 派发事件修改外部变量
       },
       _offset(offsetWidth) {
         this.$refs.progress.style.width = `${offsetWidth}px`
@@ -72,7 +74,7 @@
     },
     watch: {
       percent(newPercent) {
-        if (newPercent >= 0 && !this.touch.initiated) {
+        if (newPercent >= 0 && !this.touch.initiated) { // initiated没有拖动时才走这里，修改权限
           const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth
           const offsetWidth = newPercent * barWidth // 偏移宽度
           this._offset(offsetWidth)
