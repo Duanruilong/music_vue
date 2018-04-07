@@ -1,3 +1,8 @@
+/** 
+ * @Author: DRl 
+ * @Date: 2018-04-07 22:23:40 
+ * @Desc: 播放滚动条 
+ */
 <template>
   <div class="progress-bar" ref="progressBar" @click="progressClick">
     <div class="bar-inner">
@@ -16,12 +21,12 @@
 <script type="text/ecmascript-6">
   import {prefixStyle} from 'common/js/dom'
 
-  const progressBtnWidth = 16
+  const progressBtnWidth = 16 // 按钮宽度
   const transform = prefixStyle('transform')
 
   export default {
     props: {
-      percent: {
+      percent: { // 百分比
         type: Number,
         default: 0
       }
@@ -62,14 +67,14 @@
       },
       _offset(offsetWidth) {
         this.$refs.progress.style.width = `${offsetWidth}px`
-        this.$refs.progressBtn.style[transform] = `translate3d(${offsetWidth}px,0,0)`
+        this.$refs.progressBtn.style[transform] = `translate3d(${offsetWidth}px,0,0)` // transform实现小球的偏移
       }
     },
     watch: {
       percent(newPercent) {
         if (newPercent >= 0 && !this.touch.initiated) {
           const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth
-          const offsetWidth = newPercent * barWidth
+          const offsetWidth = newPercent * barWidth // 偏移宽度
           this._offset(offsetWidth)
         }
       }

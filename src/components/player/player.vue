@@ -148,7 +148,7 @@
       disableCls() { // 只有准备条件满足是才去做对应操作
         return this.songReady ? '' : 'disable'
       },
-      percent() {
+      percent() { // 播放比例，当前播放时间除于总时长 
         return this.currentTime / this.currentSong.duration
       },
       ...mapGetters([ // mutation 改变之后就会映射到这
@@ -431,6 +431,7 @@
           this.currentLineNum = 0
         }
         clearTimeout(this.timer)
+        this.$nextTick(() => {})
         this.timer = setTimeout(() => { // 延时执行
           this.$refs.audio.play()
           // this.getLyric()
