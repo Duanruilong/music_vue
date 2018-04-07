@@ -3,6 +3,7 @@
  * @Date: 2018-04-03 23:35:04 
  * @Desc: 歌曲的播放器组件 
  * VUE 动画transition，加入事件函数和钩子函数实现动画
+ * @click.stop-->防止冒泡事件
  */
 <template>
   <div class="player" v-show="playlist.length>0">
@@ -135,10 +136,10 @@
       }
     },
     computed: {
-      cdCls() {
+      cdCls() { // 图片旋转控制
         return this.playing ? 'play' : 'play pause'
       },
-      playIcon() {
+      playIcon() { // 播放图标
         return this.playing ? 'icon-pause' : 'icon-play'
       },
       miniIcon() {
@@ -206,7 +207,7 @@
         this.$refs.cdWrapper.style.transition = ''
         this.$refs.cdWrapper.style[transform] = ''
       },
-      togglePlaying() {
+      togglePlaying() { // 播放器的开始于暂停
         if (!this.songReady) {
           return
         }
@@ -428,14 +429,14 @@
           this.currentLineNum = 0
         }
         clearTimeout(this.timer)
-        this.timer = setTimeout(() => {
+        this.timer = setTimeout(() => { // 延时执行
           this.$refs.audio.play()
           this.getLyric()
         }, 1000)
       },
-      playing(newPlaying) {
+      playing(newPlaying) { // 播放的状态
         const audio = this.$refs.audio
-        this.$nextTick(() => {
+        this.$nextTick(() => { // 延时执行
           newPlaying ? audio.play() : audio.pause()
         })
       },
