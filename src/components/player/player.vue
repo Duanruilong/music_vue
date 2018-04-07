@@ -127,7 +127,7 @@
     data() {
       return {
         songReady: false,
-        currentTime: 0,
+        currentTime: 0, // 当前时间
         radius: 32,
         currentLyric: null,
         currentLineNum: 0,
@@ -145,7 +145,7 @@
       miniIcon() {
         return this.playing ? 'icon-pause-mini' : 'icon-play-mini'
       },
-      disableCls() {
+      disableCls() { // 只有准备条件满足是才去做对应操作
         return this.songReady ? '' : 'disable'
       },
       percent() {
@@ -273,14 +273,14 @@
         this.songReady = true
         this.savePlayHistory(this.currentSong)
       },
-      error() {
+      error() { // 歌曲报错或者加载失败，去做好用户体验
         this.songReady = true
       },
       updateTime(e) {
         this.currentTime = e.target.currentTime
       },
-      format(interval) {
-        interval = interval | 0
+      format(interval) { // 时间戳转换
+        interval = interval | 0 // 向上取整
         const minute = interval / 60 | 0
         const second = this._pad(interval % 60)
         return `${minute}:${second}`
@@ -384,7 +384,7 @@
         this.$refs.middleL.style[transitionDuration] = `${time}ms`
         this.touch.initiated = false
       },
-      _pad(num, n = 2) {
+      _pad(num, n = 2) { // 补零算法
         let len = num.toString().length
         while (len < n) {
           num = '0' + num
@@ -433,7 +433,7 @@
         clearTimeout(this.timer)
         this.timer = setTimeout(() => { // 延时执行
           this.$refs.audio.play()
-          this.getLyric()
+          // this.getLyric()
         }, 1000)
       },
       playing(newPlaying) { // 播放的状态
