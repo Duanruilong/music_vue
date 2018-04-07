@@ -431,10 +431,9 @@
           this.currentLineNum = 0
         }
         clearTimeout(this.timer)
-        this.$nextTick(() => {})
-        this.timer = setTimeout(() => { // 延时执行
+        this.timer = setTimeout(() => {
           this.$refs.audio.play()
-          // this.getLyric()
+          this.getLyric()
         }, 1000)
       },
       playing(newPlaying) { // 播放的状态

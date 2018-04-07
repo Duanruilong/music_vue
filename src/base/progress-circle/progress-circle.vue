@@ -1,3 +1,9 @@
+/** 
+ * @Author: drl 
+ * @Date: 2018-04-07 23:47:43 
+ * @Desc: 圆形进度条组件 
+ * stroke-dasharray = 描边；stroke-dashoffset = 阴影 ；viewBox = 画布大小
+ */
 <template>
   <div class="progress-circle">
     <svg :width="radius" :height="radius" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg">
@@ -21,9 +27,9 @@
         default: 0
       }
     },
-    data() {
+    data() { // 获取dashArray
       return {
-        dashArray: Math.PI * 100
+        dashArray: Math.PI * 100 // 圆的周长
       }
     },
     computed: {
