@@ -2,7 +2,7 @@
  * @Author: DRL 
  * @Date: 2018-04-03 23:35:04 
  * @Desc: 歌曲的播放器组件 
- * VUE 动画transition，加入事件函数
+ * VUE 动画transition，加入事件函数和钩子函数实现动画
  */
 <template>
   <div class="player" v-show="playlist.length>0">
