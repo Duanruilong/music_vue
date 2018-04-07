@@ -181,16 +181,16 @@
           }
         }
 
-        animations.registerAnimation({
+        animations.registerAnimation({ // 注册
           name: 'move',
           animation,
-          presets: {
+          presets: { // 动画预设
             duration: 400, // 间隔
             easing: 'linear' // 动画预设
           }
         })
 
-        animations.runAnimation(this.$refs.cdWrapper, 'move', done)
+        animations.runAnimation(this.$refs.cdWrapper, 'move', done) // 运行，done对应的就是afterEnter
       },
       afterEnter() { // VUE 的一些动画钩子
         animations.unregisterAnimation('move')
