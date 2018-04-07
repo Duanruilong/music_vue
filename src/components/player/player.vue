@@ -232,7 +232,7 @@
         }
       },
       next() { // 下一首
-        if (!this.songReady) { // 对快速点击播放报错处理
+        if (!this.songReady) { // songReady标志位处理问题，对快速点击播放报错处理
           return
         }
         if (this.playlist.length === 1) {
