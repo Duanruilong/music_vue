@@ -40,7 +40,7 @@ apiRoutes.get('/getDiscList', function (req, res) { // 定义一个路由，向q
   })
 })
 
-apiRoutes.get('/lyric', function (req, res) {
+apiRoutes.get('/lyric', function (req, res) { // 获取歌词
   var url = 'https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric_new.fcg'
 
   axios.get(url, {
@@ -51,8 +51,8 @@ apiRoutes.get('/lyric', function (req, res) {
     params: req.query
   }).then((response) => {
     var ret = response.data
-    if (typeof ret === 'string') {
-      var reg = /^\w+\(({[^()]+})\)$/
+    if (typeof ret === 'string') { // 数据处理
+      var reg = /^\w+\(({[^()]+})\)$/ // 正则匹配callback数据
       var matches = ret.match(reg)
       if (matches) {
         ret = JSON.parse(matches[1])

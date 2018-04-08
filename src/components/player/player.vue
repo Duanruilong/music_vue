@@ -446,7 +446,7 @@
       ])
     },
     watch: {
-      currentSong(newSong, oldSong) {
+      currentSong(newSong, oldSong) { // newSong, oldSong歌曲id没有变就啥也不做
         if (!newSong.id) {
           return
         }
