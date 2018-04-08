@@ -142,6 +142,9 @@
       playIcon() { // 播放图标
         return this.playing ? 'icon-pause' : 'icon-play'
       },
+      iconMode() { // 播放模式
+        return this.mode === playMode.sequence ? 'icon-sequence' : this.mode === playMode.loop ? 'icon-loop' : 'icon-random'
+      },
       miniIcon() {
         return this.playing ? 'icon-pause-mini' : 'icon-play-mini'
       },
@@ -154,7 +157,10 @@
       ...mapGetters([ // mutation 改变之后就会映射到这
         'currentIndex',
         'fullScreen',
-        'playing'
+        'playing',
+        'playlist',
+        'currentSong',
+        'mode'
       ])
     },
     created() {
@@ -295,6 +301,10 @@
           this.currentLyric.seek(currentTime * 1000)
         }
       },
+      changeMode() { // 选择状态,每点击一次改变播放模式状态
+        const mode = (this.mode + 1) % 3
+        this.setPlayMode(mode)
+      },
       getLyric() {
         this.currentSong.getLyric().then((lyric) => {
           if (this.currentSong.lyric !== lyric) {
@@ -407,10 +417,11 @@
           scale
         }
       },
-      ...mapMutations({ // 调用对应的‘setFullScreen’state去修改对应的值
+      ...mapMutations({ // 调用对应的‘setFullScreen’state去修改对应的值,映射
         setFullScreen: 'SET_FULL_SCREEN',
         setPlayingState: 'SET_PLAYING_STATE',
-        setCurrentIndex: 'SET_CURRENT_INDEX'
+        setCurrentIndex: 'SET_CURRENT_INDEX',
+        setPlayMode: 'SET_PLAY_MODE'
       }),
       ...mapActions([
         'savePlayHistory'
