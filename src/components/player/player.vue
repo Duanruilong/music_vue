@@ -114,6 +114,7 @@
   import ProgressBar from 'base/progress-bar/progress-bar'
   import ProgressCircle from 'base/progress-circle/progress-circle'
   import {playMode} from 'common/js/config'
+  import {shuffle} from 'common/js/util'
   import Lyric from 'lyric-parser'
   import Scroll from 'base/scroll/scroll'
   import {playerMixin} from 'common/js/mixin'
@@ -154,13 +155,14 @@
       percent() { // 对于播放比例当前播放时间除于总时长
         return this.currentTime / this.currentSong.duration
       },
-      ...mapGetters([ // mutation 改变之后就会映射到这
+      ...mapGetters([ // mutation 改变之后就会映射到这,获取一些初始值
         'currentIndex',
         'fullScreen',
         'playing',
         'playlist',
         'currentSong',
-        'mode'
+        'mode',
+        'sequenceList'
       ])
     },
     created() {
@@ -304,6 +306,21 @@
       changeMode() { // 选择状态,每点击一次改变播放模式状态
         const mode = (this.mode + 1) % 3
         this.setPlayMode(mode)
+        let list = null
+        if (mode === playMode.random) { // 随机
+          list = shuffle(this.sequenceList)
+        } else {
+          list = this.sequenceList
+        }
+        this.setPlaylist(list)
+        // setPlaylist改变了要保证currentindex里的ID不变要是对应的
+        this.resectCurrentIndex(list)
+      },
+      resectCurrentIndex(list) {
+        let index = list.findIndex((item) => {
+          return item.id === this.currentSong.id // 同时修改currentSong里面的ID
+        })
+        this.setCurrentIndex(index)
       },
       getLyric() {
         this.currentSong.getLyric().then((lyric) => {
@@ -421,7 +438,8 @@
         setFullScreen: 'SET_FULL_SCREEN',
         setPlayingState: 'SET_PLAYING_STATE',
         setCurrentIndex: 'SET_CURRENT_INDEX',
-        setPlayMode: 'SET_PLAY_MODE'
+        setPlayMode: 'SET_PLAY_MODE',
+        setPlaylist: 'SET_PLAYLIST'
       }),
       ...mapActions([
         'savePlayHistory'
