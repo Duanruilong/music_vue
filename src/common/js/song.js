@@ -19,13 +19,13 @@ export default class Song {
 
   getLyric() { // 获取歌词
     if (this.lyric) {
-      return Promise.resolve(this.lyric)
+      return Promise.resolve(this.lyric) // 本身就是Promise
     }
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => { // 就只获取歌词，处理歌词
       getLyric(this.mid).then((res) => {
         if (res.retcode === ERR_OK) {
-          this.lyric = Base64.decode(res.lyric)
+          this.lyric = Base64.decode(res.lyric) // Base64转码
           resolve(this.lyric)
         } else {
           reject('no lyric')

@@ -130,7 +130,7 @@
         songReady: false,
         currentTime: 0, // 当前时间
         radius: 32,
-        currentLyric: null,
+        currentLyric: null, // 歌词
         currentLineNum: 0,
         currentShow: 'cd',
         playingLyric: ''
@@ -323,11 +323,11 @@
         this.setCurrentIndex(index)
       },
       getLyric() {
-        this.currentSong.getLyric().then((lyric) => {
+        this.currentSong.getLyric().then((lyric) => { // 可以拿到lyric
           if (this.currentSong.lyric !== lyric) {
             return
           }
-          this.currentLyric = new Lyric(lyric, this.handleLyric)
+          this.currentLyric = new Lyric(lyric, this.handleLyric) // lyric 歌词的全部数据；this.handleLyric是回调
           if (this.playing) {
             this.currentLyric.play()
           }

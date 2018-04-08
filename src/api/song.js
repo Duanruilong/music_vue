@@ -1,10 +1,10 @@
 import {commonParams} from './config'
 import axios from 'axios'
-/** 
- * javascript comment 
- * @Author: drl 
- * @Date: 2018-04-09 00:02:29 
- * @Desc: 获取歌词接口 
+/**
+ * 获取歌词接口
+ * @return {[type]}                [description]
+ * @author DRLong
+ * @date   2018-03-13T00:40:13+080
  */
 export function getLyric(mid) {
   const url = '/api/lyric'
