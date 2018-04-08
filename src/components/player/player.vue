@@ -131,7 +131,7 @@
         currentTime: 0, // 当前时间
         radius: 32,
         currentLyric: null, // 歌词
-        currentLineNum: 0,
+        currentLineNum: 0, // 当前歌词所在行
         currentShow: 'cd',
         playingLyric: ''
       }
@@ -328,7 +328,7 @@
             return
           }
           this.currentLyric = new Lyric(lyric, this.handleLyric) // lyric 歌词的全部数据；this.handleLyric是回调
-          if (this.playing) {
+          if (this.playing) { // 歌曲正在播放
             this.currentLyric.play()
           }
         }).catch(() => {
@@ -337,11 +337,11 @@
           this.currentLineNum = 0
         })
       },
-      handleLyric({lineNum, txt}) {
-        this.currentLineNum = lineNum
+      handleLyric({lineNum, txt}) { // 歌词每一行改变时就回调一下
+        this.currentLineNum = lineNum // 当前的行数
         if (lineNum > 5) {
-          let lineEl = this.$refs.lyricLine[lineNum - 5]
-          this.$refs.lyricList.scrollToElement(lineEl, 1000)
+          let lineEl = this.$refs.lyricLine[lineNum - 5] // 滚动的位置，始终是第5行位置
+          this.$refs.lyricList.scrollToElement(lineEl, 1000) // 滚动开始动画
         } else {
           this.$refs.lyricList.scrollTo(0, 0, 1000)
         }
