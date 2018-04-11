@@ -28,7 +28,7 @@
              @touchstart.prevent="middleTouchStart"
              @touchmove.prevent="middleTouchMove"
              @touchend="middleTouchEnd"
-        >
+         >
           <div class="middle-l" ref="middleL">
             <div class="cd-wrapper" ref="cdWrapper">
               <div class="cd" :class="cdCls">
@@ -166,6 +166,7 @@
       ])
     },
     created() {
+      // 滚动事件
       this.touch = {}
     },
     methods: {
@@ -350,42 +351,43 @@
       showPlaylist() {
         this.$refs.playlist.show()
       },
-      middleTouchStart(e) {
-        this.touch.initiated = true
+      middleTouchStart(e) { // 切换动画
+        this.touch.initiated = true // 标志位
         // 用来判断是否是一次移动
         this.touch.moved = false
         const touch = e.touches[0]
         this.touch.startX = touch.pageX
         this.touch.startY = touch.pageY
       },
-      middleTouchMove(e) {
+      middleTouchMove(e) { // 切换动画
         if (!this.touch.initiated) {
           return
         }
         const touch = e.touches[0]
+        // 记录歌词的起始位置
         const deltaX = touch.pageX - this.touch.startX
         const deltaY = touch.pageY - this.touch.startY
-        if (Math.abs(deltaY) > Math.abs(deltaX)) {
+        if (Math.abs(deltaY) > Math.abs(deltaX)) { // 纵向大于横向
           return
         }
         if (!this.touch.moved) {
           this.touch.moved = true
         }
         const left = this.currentShow === 'cd' ? 0 : -window.innerWidth
-        const offsetWidth = Math.min(0, Math.max(-window.innerWidth, left + deltaX))
-        this.touch.percent = Math.abs(offsetWidth / window.innerWidth)
+        const offsetWidth = Math.min(0, Math.max(-window.innerWidth, left + deltaX)) // 0到一个负值
+        this.touch.percent = Math.abs(offsetWidth / window.innerWidth) // 滑动百分比
         this.$refs.lyricList.$el.style[transform] = `translate3d(${offsetWidth}px,0,0)`
         this.$refs.lyricList.$el.style[transitionDuration] = 0
         this.$refs.middleL.style.opacity = 1 - this.touch.percent
         this.$refs.middleL.style[transitionDuration] = 0
       },
-      middleTouchEnd() {
+      middleTouchEnd() { // 切换动画
         if (!this.touch.moved) {
           return
         }
         let offsetWidth
         let opacity
-        if (this.currentShow === 'cd') {
+        if (this.currentShow === 'cd') { // 右滑到左
           if (this.touch.percent > 0.1) {
             offsetWidth = -window.innerWidth
             opacity = 0
@@ -394,7 +396,7 @@
             offsetWidth = 0
             opacity = 1
           }
-        } else {
+        } else { // 左滑到右
           if (this.touch.percent < 0.9) {
             offsetWidth = 0
             this.currentShow = 'cd'
