@@ -62,7 +62,7 @@
         // this._offset(e.offsetX)
         this._triggerPercent()
       },
-      _triggerPercent() {
+      _triggerPercent() { // 拖动进度条
         const barWidth = this.$refs.progressBar.clientWidth - progressBtnWidth
         const percent = this.$refs.progress.clientWidth / barWidth
         this.$emit('percentChange', percent) // 派发事件修改外部变量

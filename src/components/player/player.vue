@@ -221,7 +221,7 @@
           return
         }
         this.setPlayingState(!this.playing)
-        if (this.currentLyric) {
+        if (this.currentLyric) { // currentLyric存在时清除动画
           this.currentLyric.togglePlay()
         }
       },
@@ -232,11 +232,11 @@
           this.next()
         }
       },
-      loop() {
+      loop() { // 单曲循环
         this.$refs.audio.currentTime = 0
         this.$refs.audio.play()
         this.setPlayingState(true)
-        if (this.currentLyric) {
+        if (this.currentLyric) { // currentLyric存在时清除偏移
           this.currentLyric.seek(0)
         }
       },
@@ -244,7 +244,7 @@
         if (!this.songReady) { // songReady标志位处理问题，对快速点击播放报错处理
           return
         }
-        if (this.playlist.length === 1) {
+        if (this.playlist.length === 1) { // 只有1时
           this.loop()
           return
         } else {
@@ -285,22 +285,25 @@
       error() { // 歌曲报错或者加载失败，去做好用户体验
         this.songReady = true
       },
-      updateTime(e) {
+      updateTime(e) { // 播放器，当前时间
+        console.log(e.target)
         this.currentTime = e.target.currentTime
       },
       format(interval) { // 时间戳转换
         interval = interval | 0 // 向上取整
         const minute = interval / 60 | 0
         const second = this._pad(interval % 60)
+        // console.log(`${minute}:${second}`)
         return `${minute}:${second}`
       },
       onProgressBarChange(percent) { // 滚动条的触发事件回调函数
         const currentTime = this.currentSong.duration * percent
-        this.$refs.audio.currentTime = currentTime
+        // console.log(currentTime)
+        this.$refs.audio.currentTime = currentTime // 当前播放时间
         if (!this.playing) {
           this.togglePlaying()
         }
-        if (this.currentLyric) {
+        if (this.currentLyric) { // currentLyric存在时偏移
           this.currentLyric.seek(currentTime * 1000)
         }
       },
@@ -325,14 +328,14 @@
       },
       getLyric() {
         this.currentSong.getLyric().then((lyric) => { // 可以拿到lyric
-          if (this.currentSong.lyric !== lyric) {
-            return
-          }
+          // if (this.currentSong.lyric !== lyric) {
+          //   return
+          // }
           this.currentLyric = new Lyric(lyric, this.handleLyric) // lyric 歌词的全部数据；this.handleLyric是回调
           if (this.playing) { // 歌曲正在播放
             this.currentLyric.play()
           }
-        }).catch(() => {
+        }).catch(() => { // 这里没有获取到歌词
           this.currentLyric = null
           this.playingLyric = ''
           this.currentLineNum = 0
@@ -455,17 +458,21 @@
         if (newSong.id === oldSong.id) {
           return
         }
-        if (this.currentLyric) {
+        if (this.currentLyric) { // currentLyric存在时清除动画
           this.currentLyric.stop()
           this.currentTime = 0
           this.playingLyric = ''
           this.currentLineNum = 0
         }
-        clearTimeout(this.timer)
-        this.timer = setTimeout(() => {
+        // clearTimeout(this.timer)
+        this.$nextTick(() => { // 前台到后台再返回还可以播放
           this.$refs.audio.play()
           this.getLyric()
-        }, 1000)
+        })
+        // this.timer = setTimeout(() => { // 前台到后台再返回还可以播放
+        //   this.$refs.audio.play()
+        //   this.getLyric()
+        // }, 1000)
       },
       playing(newPlaying) { // 播放的状态
         const audio = this.$refs.audio
